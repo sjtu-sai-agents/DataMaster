@@ -1,0 +1,147 @@
+# ============================================
+# LLM 配置
+# ============================================
+llm:
+  openai:
+    provider: "openai"
+    model: "gpt-5.2"
+    api_key: "j0vzer7f1xmkltq1000dfoz4afe8bjh3k0q84apb"
+    base_url: "https://api.gpugeek.com/v1"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 60
+    max_retries: 3
+    retry_delay: 1.0
+
+  anthropic:
+    provider: "anthropic"
+    model: "claude-haiku-4-5-20251001"
+    api_key: "YOUR_ANTHROPIC_API_KEY"
+    base_url: "YOUR_ANTHROPIC_BASE_URL"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 60
+    max_retries: 3
+    retry_delay: 1.0
+
+  # 本地 LLM 配置示例
+  local_sglang:
+    provider: "deepseek"
+    model: "volcengine/deepseek-v3-2-251201"
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "${LLM_BASE_URL}"
+    temperature: 0.7
+    max_tokens: 8192
+    timeout: 300
+    max_retries: 3
+    retry_delay: 1.0
+
+  default: "local_sglang"
+
+# ============================================
+# ML-Master Agent 配置
+# ============================================
+agent:
+  # LLM 模型配置
+  code_model: "volcengine/deepseek-v3-2-251201"
+  code_temp: 0.5
+  feedback_model: "volcengine/deepseek-v3-2-251201"
+  feedback_temp: 0.0
+
+  # Agent 模式配置（使用 Agent 框架支持工具调用）
+  use_agent_mode: true              # 是否使用 Agent 模式（支持多轮工具调用）
+  max_turns: 30                     # 每个 Agent 的最大轮数
+
+# ============================================
+# ML-Master MCTS 配置
+# ============================================
+mcts:
+  # 搜索限制
+  steps: 500                      # 最大搜索步数
+  time_limit: 43200               # 时间限制 (12小时，单位秒)
+
+  # 搜索策略
+  num_drafts: 5                   # 初始草稿方案数量
+  num_bugs: 3                     # 每个 bug 节点的最大调试次数
+  num_improves: 3                 # 每个节点的最大改进次数
+  parallel_search_num: 1         # 并行搜索线程数
+
+  # UCT 参数
+  exploration_constant: 1.414     # UCT 探索常数
+  metric_improvement_threshold: 0.001  # 改进阈值
+  max_improve_failure: 2          # 最大改进失败次数
+  max_debug_depth: 3              # 最大调试深度
+  back_debug_depth: 1             # 回退调试深度
+  invalid_metric_upper_bound: 50  # 无效度量上界
+
+  # 行为标志
+  obfuscate: false                # 是否混淆任务描述
+  steerable_reasoning: false      # 是否使用可推理推理
+  check_format: false             # 是否检查提交格式
+  save_all_submission: false      # 是否保存所有提交
+
+# ============================================
+# Session 配置
+# ============================================
+session:
+  type: "local"
+  local:
+    working_dir: "./playground/ml_master/workspace"
+    timeout: 3600
+    symlinks: {"./playground/ml_master/data/public": "input"}
+
+# ============================================
+# MCP 配置
+# ============================================
+mcp:
+  config_file: "${PROJECT_ROOT}/configs/mcp_config4data.json"
+  enabled: true
+
+# ============================================
+# Env 配置（环境管理）
+# ============================================
+env:
+  # 集群配置（本地模式，最小化）
+  cluster:
+    debug_pool:
+      type: "cpu"
+      max_concurrent: 1
+    train_pool:
+      type: "cpu"
+      max_concurrent: 1
+
+  # Docker 配置（本地模式）
+  docker:
+    base_image: "python:3.11-slim"
+    registry: "docker.io"
+    pull_policy: "if_not_present"
+
+  # 作业调度配置
+  scheduler:
+    type: "local"
+    queue_timeout: 300
+    retry_failed: false
+    max_retries: 1
+
+# ============================================
+# 日志配置
+# ============================================
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  log_path: "./logs/ml_master.log"
+
+# ============================================
+# LLM 输出配置
+# ============================================
+llm_output:
+  show_in_console: true
+  log_to_file: true
+
+# ============================================
+# 其他配置
+# ============================================
+project_root: "."
+workspace: "./playground/ml_master/workspace"
+results_dir: "./playground/ml_master/results"
+debug: false

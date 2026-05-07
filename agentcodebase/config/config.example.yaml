@@ -1,0 +1,30 @@
+# Feishu Bot Configuration
+feishu:
+  keyword: AgentCodeBase 通知
+  url: your_feishu_url
+
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: '[%(asctime)s] [%(levelname)s] [%(name)s:%(lineno)d] - %(message)s'
+  file: ~/.codebase/logs.log
+
+llm_pipeline:
+  model:
+    provider: openai
+    api_key: YOUR_API_KEY
+    base_url: YOUR_BASE_URL
+    model: "gpt-4o" 
+    rate_limit: 20 
+    max_tokens: 5012
+    temperature: 0.7 
+
+  prompts:
+    system_prompt_path: "prompts/system/default.md"
+    user_prompt_path: "prompts/user/default.md"
+
+  output_data:
+    output_dir: "output"
+    experiment_name: "Demo"
+    need_time_stamp: false

@@ -1,0 +1,1 @@
+/data/yaxindu/clash/clash-linux-amd64-v1.10.0 -f /data/yaxindu/clash/RHE52Vwauyz7.yaml -d /data/yaxindu/clash

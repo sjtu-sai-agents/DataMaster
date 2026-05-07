@@ -1,0 +1,50 @@
+#!/bin/bash
+# 批量传输实验数据脚本
+# 目标目录: ${DATA_ROOT}
+
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/3d-object-detection-for-autonomous-vehicles ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/AI4Code ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/aerial-cactus-identification ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/alaska2-image-steganalysis ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/aptos2019-blindness-detection ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/billion-word-imputation ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/bms-molecular-translation ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/cassava-leaf-disease-classification ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/cdiscount-image-classification-challenge ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/hotel-id-2021-fgvc8 ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/hubmap-kidney-segmentation ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/nfl-player-contact-detection ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/nomad2018-predict-transparent-conductors ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/osic-pulmonary-fibrosis-progression ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/petfinder-pawpularity-score ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/plant-pathology-2020-fgvc7 ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/plant-pathology-2021-fgvc8 ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/predict-volcanic-eruptions-ingv-oe ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/random-acts-of-pizza ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/ranzcr-clip-catheter-line-classification ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/rsna-2022-cervical-spine-fracture-detection ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/rsna-breast-cancer-detection ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/rsna-miccai-brain-tumor-radiogenomic-classification ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/seti-breakthrough-listen ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/siim-covid19-detection ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/siim-isic-melanoma-classification ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/smartphone-decimeter-2022 ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/spaceship-titanic ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/spooky-author-identification ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/stanford-covid-vaccine ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/statoil-iceberg-classifier-challenge ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/tabular-playground-series-dec-2021 ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/tabular-playground-series-may-2022 ${DATA_ROOT}/
+# # rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/tensorflow-speech-recognition-challenge ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/tensorflow2-question-answering ${DATA_ROOT}/
+# # rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/text-normalization-challenge-english-language ${DATA_ROOT}/
+# # rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/text-normalization-challenge-russian-language ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/tgs-salt-identification-challenge ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/the-icml-2013-whale-challenge-right-whale-redux ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/tweet-sentiment-extraction ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/us-patent-phrase-to-phrase-matching ${DATA_ROOT}/
+# # rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/uw-madison-gi-tract-image-segmentation ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/ventilator-pressure-prediction ${DATA_ROOT}/
+# # rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/vesuvius-challenge-ink-detection ${DATA_ROOT}/
+# # rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/vinbigdata-chest-xray-abnormalities-detection ${DATA_ROOT}/
+# rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/whale-categorization-playground ${DATA_ROOT}/

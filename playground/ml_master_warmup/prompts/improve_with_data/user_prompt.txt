@@ -1,0 +1,40 @@
+# Task description
+You are participating in *MLE-bench*, an offline version of Kaggle competitions adapted to test coding agents.
+
+Your mission in this stage is **data-only improvement**:
+- use the provided external data context to enhance the current training data,
+- keep model architecture and core training logic unchanged,
+- preserve submission format and save `submission/submission.csv`.
+
+COMPETITION INSTRUCTIONS
+------
+{task_description}
+
+# External data context (from data_search)
+{data_context}
+
+# Memory
+The memory of previous solutions used to improve performance is provided below:
+{memory}
+
+# Strict instructions
+1. You may modify data loading / preprocessing / merge / feature input data.
+2. Do NOT redesign model architecture or perform unrelated large refactors.
+3. Keep the pipeline runnable and stable.
+4. Print validation metric on hold-out validation set.
+5. Save predictions to `./submission/submission.csv`.
+
+# Response format
+Return a brief 3-5 sentence plan, then one single markdown code block with complete runnable Python code.
+
+# Operation tools manual
+{operation_tools_readme}
+
+# Data preview
+{data_preview}
+
+# Previous solution
+{best_code}
+
+# Execution output
+{execution_output}

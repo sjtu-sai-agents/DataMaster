@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "__EVOMASTER_WORKSPACES__"
+      ],
+      "env": {
+        "DEBUG": "false"
+      }
+    },
+    "bing-search": {
+      "command": "npx",
+      "args": ["-y", "bing-cn-mcp"],
+      "env": {
+        "DEBUG": "false"
+      }
+    },
+    "mind-map": {
+      "command": "npx",
+      "args": ["-y", "@lucianaib/mind-map-mcp"],
+      "env": {
+        "DEBUG": "false"
+      }
+    },
+    "stock-analysis": {
+      "command": "npx",
+      "args": ["-y", "mcp-stock-analysis"],
+      "env": { "DEBUG": "false" }
+    }
+  }
+}

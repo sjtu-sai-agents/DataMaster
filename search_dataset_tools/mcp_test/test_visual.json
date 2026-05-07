@@ -1,0 +1,31 @@
+[
+    {
+        "tool": "visual_inspect_images_details",
+        "input_params": {
+            "image_files": "${PROJECT_ROOT}/test/test_visual/image.png",
+            "query": "这张图片展示了什么？"
+        }
+    },
+    {
+        "tool": "visual_inspect_images_details",
+        "input_params": {
+            "image_files": [
+                "${PROJECT_ROOT}/test/test_visual/image.png",
+                "${PROJECT_ROOT}/test/test_visual/image_2.png"
+            ],
+            "query": "这两张图片有什么区别和共性？"
+        }
+    },
+    {
+        "tool": "visual_inspect_images_info",
+        "input_params": {
+            "image_path": "${PROJECT_ROOT}/test/test_visual"
+        }
+    },
+    {
+        "tool": "visual_inspect_images_info",
+        "input_params": {
+            "image_path": "${PROJECT_ROOT}/test/test_visual/image.png"
+        }
+    }
+]

@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "operate_submission_for_initial": {
+      "command": "python",
+      "args": [
+        "search_dataset_tools/operate_submission/for_initial_exp.py"
+      ],
+      "env": {
+        "ML_MASTER_DATA_ROOT": "${DATA_ROOT}",
+        "ML_MASTER_DATA_EXPID": "siim-isic-melanoma-classification",
+        "ML_MASTER_GRADING_SERVERS": "http://127.0.0.1:50022"
+      }
+    },
+    "memory_tree": {
+      "command": "python",
+      "args": [
+        "search_dataset_tools/memory_tree_interface.py"
+      ],
+      "env": {
+        "ML_MASTER_DATA_ROOT": "${DATA_ROOT}",
+        "ML_MASTER_DATA_EXPID": "siim-isic-melanoma-classification",
+        "ML_MASTER_GRADING_SERVERS": "http://127.0.0.1:50022"
+      }
+    }
+  }
+}

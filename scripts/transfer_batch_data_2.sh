@@ -1,0 +1,10 @@
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/nfl-player-contact-detection ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/nomad2018-predict-transparent-conductors ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/osic-pulmonary-fibrosis-progression ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/petfinder-pawpularity-score ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/plant-pathology-2020-fgvc7 ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/plant-pathology-2021-fgvc8 ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/predict-volcanic-eruptions-ingv-oe ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/random-acts-of-pizza ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/ranzcr-clip-catheter-line-classification ${DATA_ROOT}/
+rsync -avzP --info=progress2 -e "ssh" xiyuan@dp_gpu_4090_1:/data/exp_data/rsna-2022-cervical-spine-fracture-detection ${DATA_ROOT}/

@@ -1,0 +1,211 @@
+# ML-Master v2 配置 - Plant Pathology 2021 FGVC8
+# 使用 Red-Scout + Skilled-Black 架构（ml_master_datatree_v2）
+
+# ============================================
+# 实验特定配置
+# ============================================
+exp_id: "plant-pathology-2021-fgvc8"
+data_root: "/data/public_data/exp_data/data_scientist_evomaster_v2"
+
+# ============================================
+# LLM 配置
+# ============================================
+llm:
+  openai:
+    provider: "openai"
+    model: "${GPT_CHAT_MODEL}"
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "${GPT_BASE_URL}"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 60
+    max_retries: 3
+    retry_delay: 1.0
+
+  anthropic:
+    provider: "anthropic"
+    model: "claude-haiku-4-5-20251001"
+    api_key: "${ANTHROPIC_API_KEY}"
+    base_url: "${ANTHROPIC_BASE_URL}"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 60
+    max_retries: 3
+    retry_delay: 1.0
+
+  local_sglang:
+    provider: "openai"
+    model: "zhipu/GLM-4.6"
+    api_key: "${IMAGE_MODEL_API_KEY}"
+    base_url: "https://api.gpugeek.com/v1"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 300
+    max_retries: 3
+    retry_delay: 1.0
+
+  default: "local_sglang"
+
+
+# ============================================
+# 多智能体配置
+# ============================================
+agents:
+  # Initial Agent - 生成初始 BaseDataLoader 代码（与 v1 相同）
+  initial:
+    llm: "local_sglang"
+    max_turns: 30
+    tools:
+      builtin: ["execute_bash", "think", "finish", "operate_submission_write_code",
+                "operate_submission_read_code", "operate_submission_fix_code",
+                "operate_submission_run_code", "operate_submission_validate_submission"]
+      mcp: "mcp_config4data_plant_pathology.json"
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 5
+    system_prompt_file: "prompts/initial/system_prompt.md"
+    user_prompt_file: "prompts/initial/user_prompt.md"
+
+  # Black Agent v2 - 数据清洗 + Skills Catalog，严禁下载数据
+  black:
+    llm: "local_sglang"
+    max_turns: 50
+    tools:
+      # execute_bash 仅用于数据探查，不允许下载外网数据
+      # Black 节点不允许访问 hidden-test 真实分数，只看 val metric + submission 合法性
+      builtin: ["execute_bash", "think", "finish", "operate_submission_write_code",
+                "operate_submission_read_code", "operate_submission_fix_code",
+                "operate_submission_run_code", "operate_submission_validate_submission"]
+      # 注意：Black v2 不配置 web search 类 MCP 工具（禁止搜索外部数据）
+      mcp: "mcp_config4data_plant_pathology.json"
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 5
+    # v2 使用新的 Black prompt（含 manifest + skills catalog）
+    # 路径相对于 playground/ml_master_datatree，用 ../ 指向 v2 目录
+    system_prompt_file: "../ml_master_datatree_v2/prompts/black/system_prompt.md"
+    user_prompt_file: "../ml_master_datatree_v2/prompts/black/user_prompt.md"
+
+  # Red Agent v2 - 数据侦察专家，只写 manifest，不跑训练
+  red:
+    llm: "local_sglang"
+    max_turns: 50
+    tools:
+      builtin: ["execute_bash", "think", "finish"]
+      mcp: "mcp_config4data_plant_pathology.json"
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 5
+    # 路径相对于 playground/ml_master_datatree，用 ../ 指向 v2 目录
+    system_prompt_file: "../ml_master_datatree_v2/prompts/red/system_prompt.md"
+    user_prompt_file: "../ml_master_datatree_v2/prompts/red/user_prompt.md"
+
+  # Metric Agent - 与 v1 相同
+  metric:
+    llm: "local_sglang"
+    max_turns: 4
+    tools:
+      builtin: ["finish"]
+    context:
+      max_tokens: 64000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 2
+    system_prompt_file: "prompts/metric/system_prompt.md"
+    user_prompt_file: "prompts/metric/user_prompt.md"
+
+# ============================================
+# MCP 配置
+# ============================================
+mcp:
+  config_file: "mcp_config4data_plant_pathology.json"
+  enabled: true
+
+# ============================================
+# Session 配置
+# ============================================
+session:
+  type: "local"
+  local:
+    working_dir: "./playground/ml_master_datatree_v2/workspace"
+    workspace_path: "./playground/workspace_v2"
+    timeout: 600
+    gpu_devices: ["0,1", "2,3", "4,5", "6,7"]
+    cpu_devices: null
+    parallel:
+      enabled: true
+      max_parallel: 4
+      split_workspace_for_exp: true
+    symlinks:
+      "/data/public_data/exp_data/data_scientist_evomaster_v2/plant-pathology-2021-fgvc8": "input"
+
+  docker:
+    image: "evomaster/base:latest"
+    container_name: null
+    use_existing_container: null
+    working_dir: "/workspace"
+    memory_limit: "64g"
+    cpu_limit: 16.0
+    gpu_devices: "0"
+    network_mode: "host"
+    volumes: {"./playground/ml_master_datatree_v2/workspace": "/workspace"}
+    env_vars: {}
+    auto_remove: false
+    timeout: 300
+
+# ============================================
+# Env 配置
+# ============================================
+env:
+  cluster:
+    debug_pool:
+      type: "cpu"
+      max_concurrent: 1
+    train_pool:
+      type: "cpu"
+      max_concurrent: 1
+  docker:
+    base_image: "python:3.11-slim"
+    registry: "docker.io"
+    pull_policy: "if_not_present"
+  scheduler:
+    type: "local"
+    queue_timeout: 300
+    retry_failed: false
+    max_retries: 1
+
+# ============================================
+# 日志 & 输出配置
+# ============================================
+llm_output:
+  show_in_console: true
+  log_to_file: true
+
+logging:
+  level: "INFO"
+  format: "%(name)s - %(levelname)s - %(message)s"
+  file: null
+  console: true
+  log_path: "./logs/evomaster_v2.log"
+
+# ============================================
+# ml_master 特有配置
+# ============================================
+grading_servers:
+  - "http://127.0.0.1:5003"
+
+project_root: "."
+workspace: "./workspace_v2"
+results_dir: "./results"
+debug: false
+
+# ============================================
+# v2 特有配置
+# ============================================
+playground: "ml_master_datatree_v2"

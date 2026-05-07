@@ -1,0 +1,92 @@
+# Multi-Agent 配置示例
+# 展示如何为多个 agent 配置独立的 prompt 文件
+
+# ============================================
+# LLM 配置（所有 agent 共享）
+# ============================================
+llm:
+  openai:
+    provider: "openai"
+    model: "gpt-5"
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "https://api.openai.com/v1"
+    temperature: 0.7
+    max_tokens: 16384
+
+  anthropic:
+    provider: "anthropic"
+    model: "claude-haiku-4-5-20251001"
+    api_key: "${ANTHROPIC_API_KEY}"
+    base_url: "https://api.anthropic.com"
+    temperature: 0.7
+    max_tokens: 16384
+
+  default: "openai"
+
+# ============================================
+# Multi-Agent 配置列表
+# ============================================
+agents:
+  # Agent 1: 代码生成器
+  - name: "code_generator"
+    max_turns: 30
+    llm: "openai"
+    system_prompt_file: "prompts/code_generator_prompt.txt"
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+
+  # Agent 2: 代码审查者
+  - name: "code_reviewer"
+    max_turns: 20
+    llm: "openai"
+    system_prompt_file: "prompts/code_reviewer_prompt.txt"
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+
+  # Agent 3: 测试生成器
+  - name: "test_generator"
+    max_turns: 25
+    llm: "openai"
+    system_prompt_file: "prompts/test_generator_prompt.txt"
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+
+# ============================================
+# Session 配置（所有 agent 共享）
+# ============================================
+session:
+  type: "local"
+
+  local:
+    working_dir: "./workspace"
+    timeout: 60
+    symlinks: {}
+
+  docker:
+    image: "evomaster/base:latest"
+    working_dir: "/workspace"
+    memory_limit: "4g"
+    cpu_limit: 2.0
+    auto_remove: false
+
+# ============================================
+# MCP 配置
+# ============================================
+mcp:
+  config_file: "mcp_config.json"
+  enabled: false
+
+# ============================================
+# 日志和输出配置
+# ============================================
+llm_output:
+  show_in_console: true
+  log_to_file: true
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  log_path: "./logs/evomaster.log"

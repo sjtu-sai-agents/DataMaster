@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "generated_from": "playground/ml_master_datatree/initial_code/**/initial_code.py",
+  "notes": [
+    "This file lists pretrained model identifiers referenced by initial_code templates.",
+    "Use it to prefetch weights into your HF cache (HF_HOME/HF_ENDPOINT) and torchvision cache.",
+    "Some models are downloaded from HuggingFace (timm/transformers), others from PyTorch model zoo (torchvision)."
+  ],
+  "timm_models": [
+    "efficientnet_b0",
+    "efficientnet_b3",
+    "efficientnet_b5",
+    "tf_efficientnet_b3_ns",
+    "tf_efficientnet_b4_ns",
+    "convnext_base.fb_in22k_ft_in1k",
+    "convnext_base",
+    "vit_base_patch16_224"
+  ],
+  "torchvision_models": [
+    "resnet50",
+    "resnext50_32x4d",
+    "efficientnet_b0",
+    "efficientnet_b3",
+    "fasterrcnn_resnet50_fpn"
+  ],
+  "transformers_models": [
+    "microsoft/deberta-v3-base",
+    "microsoft/deberta-v3-large",
+    "deepset/xlm-roberta-large-squad2",
+    "distilbert-base-uncased",
+    "t5-small"
+  ]
+}
+

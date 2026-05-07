@@ -1,0 +1,14 @@
+[
+    {
+        "tool": "search_web_google_search",
+        "input_params": {
+            "query": "Aritificial Intelligence"
+        }
+    },
+    {
+        "tool": "search_web_web_parse",
+        "input_params": {
+            "url": "https://example.com/"
+        }
+    }
+]

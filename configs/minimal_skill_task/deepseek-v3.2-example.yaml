@@ -1,0 +1,196 @@
+# Minimal Skill Task - RAG 多 Agent 流程（Analyze → Plan → Search → Summarize）
+
+# ============================================
+# LLM 配置
+# ============================================
+llm:
+  openai:
+    provider: "openai"
+    model: "${GPT_CHAT_MODEL}"
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "${GPT_BASE_URL}"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 60
+    max_retries: 3
+    retry_delay: 1.0
+
+  anthropic:
+    provider: "anthropic"
+    model: "claude-haiku-4-5-20251001"
+    api_key: "${ANTHROPIC_API_KEY}"
+    base_url: "${ANTHROPIC_BASE_URL}"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 60
+    max_retries: 3
+    retry_delay: 1.0
+
+  local_sglang:
+    provider: "deepseek"
+    model: "deepseek-v3.2"
+    api_key: "${DEEPSEEK_API_KEY}"  # 本地部署可使用占位符
+    base_url: "${DEEPSEEK_API_BASE}"
+    temperature: 0.7
+    max_tokens: 16384
+    timeout: 300
+    max_retries: 3
+    retry_delay: 1.0
+
+  default: "local_sglang"
+
+# ============================================
+# Agent 配置（四 Agent：analyze / plan / search / summarize）
+# ============================================
+agents:
+  analyze:
+    llm: "openai"
+    max_turns: 10
+    # 默认使用builtin工具集: execute_bash, str_replace_editor, think, finish, 默认不使用mcp工具
+    # 默认不使用skills
+
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 5
+
+    system_prompt_file: "prompts/analyze_system_prompt.txt"
+    user_prompt_file: "prompts/analyze_user_prompt.txt"
+
+  plan:
+    llm: "openai"
+    max_turns: 10
+    tools: # 显式指定无 tools
+    skills:  # 显式指定无 skill
+
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 5
+
+    system_prompt_file: "prompts/plan_system_prompt.txt"
+    user_prompt_file: "prompts/plan_user_prompt.txt"
+
+  search:
+    llm: "openai"
+    max_turns: 30
+    tools: "default" # 默认使用builtin工具集: execute_bash, str_replace_editor, think, finish, 默认不使用mcp工具
+    skills:  # 通配符 → 全部 skill
+      - "*"
+
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 5
+
+    system_prompt_file: "prompts/search_system_prompt.txt"
+    user_prompt_file: "prompts/search_user_prompt.txt"
+
+  summarize:
+    llm: "openai"
+    max_turns: 20
+    tools: 
+      builtin: # 指定子集: 
+        - "execute_bash"
+        - "think"
+        - "finish"
+      mcp: [] # 指定不使用mcp工具
+
+    skills:  # 指定子集
+      - "rag"
+      - "pdf"
+
+
+    context:
+      max_tokens: 128000
+      truncation_strategy: "latest_half"
+      preserve_system_messages: true
+      preserve_recent_turns: 5
+
+    system_prompt_file: "prompts/summarize_system_prompt.txt"
+    user_prompt_file: "prompts/summarize_user_prompt.txt"
+
+# ============================================
+# Embedding 配置（RAG 向量检索使用）
+# Embedding 配置（RAG 向量检索使用）
+# ============================================
+embedding:
+  # 类型：local（本地 transformer 模型）或 openai（OpenAI API）
+  type: "openai"
+  
+  # OpenAI embedding 配置（当 type 为 openai 时使用）
+  openai:
+    model: "text-embedding-3-large"
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "${GPT_BASE_URL}"
+    dimensions: 3072  # text-embedding-3-large 支持 512, 768, 1024, 2048, 3072
+  
+  # 本地模型配置（当 type 为 local 时使用）
+  local:
+    model: "evomaster/skills/rag/local_models/all-mpnet-base-v2"
+    device: "cpu"
+
+# ============================================
+# MCP 配置
+# ============================================
+
+# ============================================
+# Session 配置
+# ============================================
+session:
+  type: "local"
+
+  local:
+    working_dir: "./playground/minimal_skill_task/workspace"
+    timeout: 300
+    symlinks: {}
+
+  docker:
+    image: "evomaster/base:latest"
+    container_name: null
+    use_existing_container: null
+    working_dir: "/workspace"
+    memory_limit: "64g"
+    cpu_limit: 16.0
+    gpu_devices: "0"
+    network_mode: "host"
+    volumes: {"./playground/minimal_skill_task/workspace": "/workspace"}
+    env_vars: {}
+    auto_remove: false
+    timeout: 300
+
+# ============================================
+# Env / 日志 / 其他
+# ============================================
+env:
+  cluster:
+    debug_pool: { type: "cpu", max_concurrent: 1 }
+    train_pool: { type: "cpu", max_concurrent: 1 }
+  docker:
+    base_image: "python:3.11-slim"
+    registry: "docker.io"
+    pull_policy: "if_not_present"
+  scheduler:
+    type: "local"
+    queue_timeout: 300
+    retry_failed: false
+    max_retries: 1
+
+llm_output:
+  show_in_console: true
+  log_to_file: true
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: null
+  console: true
+  log_path: "./logs/evomaster.log"
+
+project_root: "."
+workspace: "./workspace"
+results_dir: "./results"
+debug: false

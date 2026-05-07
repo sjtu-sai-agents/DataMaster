@@ -1,0 +1,64 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "__EVOMASTER_WORKSPACES__"
+      ],
+      "env": {
+        "DEBUG": "false"
+      }
+    },
+    "operate_submission": {
+      "command": "./.venv/bin/python",
+      "args": [
+        "search_dataset_tools/operate_submission.py"
+      ],
+      "env": {
+        "ML_MASTER_DATA_ROOT": "/data/public_data/exp_data/demo1bench",
+        "ML_MASTER_DATA_EXPID": "detecting-insults-in-social-commentary",
+        "ML_MASTER_GRADING_SERVERS": "http://127.0.0.1:5003"
+      }
+    },
+    "search_web": {
+      "command": "./.venv/bin/python",
+      "args": [
+        "search_dataset_tools/search_web.py"
+      ],
+      "env": {
+        "SERPER_API_KEY": "${SERPER_API_KEY}"
+      }
+    },
+    "search_github": {
+      "command": "./.venv/bin/python",
+      "args": [
+        "search_dataset_tools/search_github.py"
+      ],
+      "env": {
+        "GITHUB_TOKEN": ""
+      }
+    },
+    "search_huggingface": {
+      "command": "./.venv/bin/python",
+      "args": [
+        "search_dataset_tools/search_huggingface.py"
+      ],
+      "env": {
+        "HF_TOKEN": "HF_TOKEN_PLACEHOLDER",
+        "HF_ENDPOINT": "https://huggingface.co",
+        "HF_HOME": "/data/HF_Cache_dataevo"
+      }
+    },
+    "search_scholar": {
+      "command": "./.venv/bin/python",
+      "args": [
+        "search_dataset_tools/search_scholar.py"
+      ],
+      "env": {
+        "SERPER_API_KEY": "${SERPER_API_KEY}"
+      }
+    }
+  }
+}

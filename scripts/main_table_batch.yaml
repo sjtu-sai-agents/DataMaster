@@ -1,0 +1,5 @@
+main_table:
+  model: "Vendor3/glm-5"
+  api_key: "${IMAGE_MODEL_API_KEY}"
+  base_url: "https://api.gpugeek.com/v1"
+  max_steps: 150
