@@ -46,7 +46,7 @@
         "search_dataset_tools/search_huggingface.py"
       ],
       "env": {
-        "HF_TOKEN": "HF_TOKEN_PLACEHOLDER",
+        "HF_TOKEN": "${HF_TOKEN}",
         "HF_ENDPOINT": "https://hf-mirror.com",
         "HF_HOME": "${HF_HOME}"
       }
@@ -58,16 +58,6 @@
       ],
       "env": {
         "SERPER_API_KEY": "${SERPER_API_KEY}"
-      }
-    },
-    "visual": {
-      "command": "python",
-      "args": [
-        "search_dataset_tools/visual.py"
-      ],
-      "env": {
-        "IMAGE_MODEL_API_KEY": "${IMAGE_MODEL_API_KEY}",
-        "IMAGE_MODEL_BASE_URL": "https://api.gpugeek.com/v1"
       }
     }
   }

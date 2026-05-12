@@ -1,4 +1,0 @@
-feishu_message_send:
-  APP_ID: ${FEISHU_APP_ID}
-  APP_SECRET: ${FEISHU_APP_SECRET}
-  chat_id: ${FEISHU_CHAT_ID}

@@ -1,9 +1,9 @@
 [project]
-name = "datascientistevomaster"
+name = "datamaster"
 version = "0.1.0"
-description = "Add your description here"
+description = "EvoMaster-based autonomous data-engineering framework for MLE-Bench workflows"
 readme = "README.md"
-requires-python = "==3.12.*"
+requires-python = ">=3.10,<3.13"
 dependencies = [
     "absl-py==2.3.1",
     "accelerate==1.12.0",

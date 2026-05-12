@@ -366,8 +366,8 @@ def interactive_input():
 
     # LLM 配置
     default_llm_model = "Vendor2/GPT-5.3-codex"
-    default_llm_api_key = "${IMAGE_MODEL_API_KEY}"
-    default_llm_base_url = "https://api.gpugeek.com/v1"
+    default_llm_api_key = "${LLM_API_KEY}"
+    default_llm_base_url = "${LLM_BASE_URL}"
     
     print("\nLLM 配置:")
     print(f"默认 LLM 配置: {default_llm_model}\n{default_llm_api_key}\n{default_llm_base_url}")

@@ -1,1 +1,0 @@
-# Configuration module for MCP-Benchmark

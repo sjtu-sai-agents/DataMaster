@@ -35,7 +35,7 @@
         "search_dataset_tools/search_huggingface.py"
       ],
       "env": {
-        "HF_TOKEN": "HF_TOKEN_PLACEHOLDER",
+        "HF_TOKEN": "${HF_TOKEN}",
         "HF_ENDPOINT": "https://hf-mirror.com",
         "HF_HOME": "${HF_HOME}"
       }

@@ -1,17 +1,10 @@
 #!/usr/bin/env python3
-"""EvoMaster 统一入口
+"""DataMaster command-line entry point.
 
-使用方式：
-  python run.py --agent minimal --task "你的任务描述"
-  python run.py --agent agent-builder --config configs/agent-builder/config.yaml
-  python run.py --agent mcp-example --interactive
-
-参数说明：
-  --agent: 指定 playground 名称（必需）
-  --config: 指定配置文件路径（可选，默认使用 configs/{agent}/config.yaml）
-  --task: 任务描述（可选，如不提供则进入交互式输入）
-  --interactive: 交互式模式（可选）
-  --run-dir: 指定 run 目录（可选，默认自动创建 runs/{agent}_{timestamp}/）
+Examples:
+  python run.py --agent ml_master_datatree --config configs/ml_master_datatree/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml --task /path/to/task/description.md
+  python run.py --agent ml_master_datatree --config configs/ml_master_datatree/config_base.yaml --task-file tasks.json
+  python run.py --agent ml_master --interactive
 """
 
 import argparse
@@ -30,103 +23,89 @@ from evomaster.core import get_playground_class, list_registered_playgrounds
 
 
 def parse_args():
-    """解析命令行参数"""
+    """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
-        description="EvoMaster 统一入口 - 运行指定的 playground agent",
+        description="DataMaster entry point for EvoMaster playground workflows",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-示例：
-  # 使用默认配置运行 minimal agent
-  python run.py --agent minimal --task "分析数据"
-
-  # 使用自定义配置
-  python run.py --agent minimal --config my_config.yaml --task "分析数据"
-
-  # 交互式模式
-  python run.py --agent agent-builder --interactive
-
-  # 指定 run 目录
-  python run.py --agent minimal --task "分析数据" --run-dir runs/my_experiment
-
-  # 批量任务（串行）
-  python run.py --agent minimal --task-file tasks.json
-
-  # 批量任务（并行）
-  python run.py --agent minimal --task-file tasks.json --parallel
+Examples:
+  python run.py --agent ml_master_datatree --config configs/ml_master_datatree/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml --task /path/to/task/description.md
+  python run.py --agent ml_master --interactive
+  python run.py --agent ml_master_datatree --task-file tasks.json --parallel
         """
     )
 
     parser.add_argument(
         "--agent",
         required=True,
-        help="Playground agent 名称（如 minimal, agent-builder, mcp-example）"
+        help="Playground name, for example ml_master_datatree or ml_master"
     )
 
     parser.add_argument(
         "--config",
-        help="配置文件路径（默认：configs/{agent}/config.yaml）"
+        help="Configuration file path. Defaults to configs/{agent}/config.yaml"
     )
 
     # 任务输入（互斥）
     task_group = parser.add_mutually_exclusive_group(required=True)
     task_group.add_argument(
         "--task",
-        help="单个任务描述，或任务文件路径（.txt 或 .md）"
+        help="Single task description or a .txt/.md task file path"
     )
     task_group.add_argument(
         "--task-file",
-        help="包含多个任务的 JSON 文件路径"
+        help="JSON file containing multiple tasks"
     )
     task_group.add_argument(
         "--interactive",
         action="store_true",
-        help="交互式模式（手动输入任务）"
+        help="Interactive task-entry mode"
     )
 
     parser.add_argument(
         "--run-dir",
-        help="指定 run 目录（默认自动创建 runs/{agent}_{timestamp}/）"
+        help="Run directory. Defaults to runs/{agent}_{timestamp}/"
     )
 
     parser.add_argument(
         "--parallel",
         action="store_true",
-        help="并行执行多个任务（仅在使用 --task-file 时有效）"
+        help="Run multiple tasks in parallel. Only valid with --task-file"
     )
 
     parser.add_argument(
         "--images",
         nargs="+",
-        help="图片文件路径列表（支持 PNG/JPG），用于多模态任务输入"
+        help="Image file paths for multimodal task input"
     )
 
     parser.add_argument(
         "--initial-code",
-        help="Initial 节点的初始代码文件路径（可选）"
+        help="Optional starter code path for the initial node"
     )
 
     parser.add_argument(
         "--initial-instruction",
-        help="Initial 节点的自然语言指令（可选）"
+        help="Optional natural-language instruction for the initial node"
     )
 
     # Test-feedback 相关参数
     parser.add_argument(
         "--test-feedback",
         action="store_true",
-        help="启用测试集反馈模式（使用测试集分数判断最佳节点）"
+        help="Enable test-feedback mode for selecting the best node"
     )
 
     direction_group = parser.add_mutually_exclusive_group()
     direction_group.add_argument(
         "--force-minimize",
         action="store_true",
-        help="强制 metric 越小越好（test-feedback 模式下有效）"
+        help="Force lower metric values to be better in test-feedback mode"
     )
     direction_group.add_argument(
         "--force-maximize",
         action="store_true",
-        help="强制 metric 越大越好（test-feedback 模式下有效）"
+        help="Force higher metric values to be better in test-feedback mode"
     )
 
     return parser.parse_args()

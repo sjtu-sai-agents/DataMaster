@@ -257,12 +257,12 @@ def inspect_dataset(
     Args:
         dataset_id (str): The unique identifier for the dataset on HuggingFace Hub.
                          Must be in the format 'organization/dataset-name' or 'user/dataset-name'.
-                         Examples: "stanfordnlp/sst2", "openai/gsm8k", "google/fleurs".
+                         Examples: "stanfordnlp/sst2", "imdb", "google/fleurs".
         config (str, optional): The configuration name to inspect. Many datasets have multiple
                                configurations representing different languages, versions, or subsets.
                                Use get_dataset_configs() to list available configurations.
                                If not specified, uses the default configuration.
-                               Example: "en-US" for PolyAI/minds14, "main" for openai/gsm8k.
+                               Example: "en-US" for PolyAI/minds14, "main" for imdb.
 
     Returns:
         str: A YAML-formatted string containing comprehensive dataset metadata including:
@@ -273,8 +273,8 @@ def inspect_dataset(
              Returns an error message if the dataset is not found or inaccessible.
 
     Example:
-        >>> inspect_dataset("openai/gsm8k", config="main")
-        id: openai/gsm8k
+        >>> inspect_dataset("imdb", config="main")
+        id: imdb
         author: openai
         created_at: '2021-08-20T20:05:47.000Z'
         ...
@@ -446,11 +446,11 @@ def get_dataset_splits(
     Args:
         dataset_id (str): The unique identifier for the dataset on HuggingFace Hub.
                          Must be in the format 'organization/dataset-name' or 'user/dataset-name'.
-                         Examples: "stanfordnlp/sst2", "openai/gsm8k", "imdb".
+                         Examples: "stanfordnlp/sst2", "imdb", "imdb".
         config (str, optional): The configuration name to inspect. Required for datasets
                                with multiple configurations. Use get_dataset_configs()
                                to list available configurations.
-                               Examples: "en-US" for PolyAI/minds14, "main" for openai/gsm8k.
+                               Examples: "en-US" for PolyAI/minds14, "main" for imdb.
                                Defaults to the default configuration if not specified.
 
     Returns:
@@ -509,7 +509,7 @@ def get_dataset_readme(dataset_id: str):
     Args:
         dataset_id (str): The unique identifier for the dataset on HuggingFace Hub.
                          Must be in the format 'organization/dataset-name' or 'user/dataset-name'.
-                         Examples: "stanfordnlp/sst2", "openai/gsm8k", "imdb".
+                         Examples: "stanfordnlp/sst2", "imdb", "imdb".
 
     Returns:
         str: The full content of the dataset's README.md file, or the description
@@ -517,10 +517,10 @@ def get_dataset_readme(dataset_id: str):
              message if the dataset is not found or has no documentation.
 
     Example:
-        >>> get_dataset_readme("openai/gsm8k")
-        # GSM8K Dataset
+        >>> get_dataset_readme("imdb")
+        # Example Dataset
         #
-        # Grade School Math 8K (GSM8K) is a dataset of 8.5K high quality...
+        # Example dataset README content...
         # [full README content]
 
     Note:
@@ -584,11 +584,11 @@ def get_dataset_sample(
     Args:
         dataset_id (str): The unique identifier for the dataset on HuggingFace Hub.
                          Must be in the format 'organization/dataset-name' or 'user/dataset-name'.
-                         Examples: "stanfordnlp/sst2", "openai/gsm8k", "imdb".
+                         Examples: "stanfordnlp/sst2", "imdb", "imdb".
         config (str, optional): The configuration name to sample from. Required for datasets
                                with multiple configurations. Use get_dataset_configs()
                                to list available configurations.
-                               Examples: "en-US" for PolyAI/minds14, "main" for openai/gsm8k.
+                               Examples: "en-US" for PolyAI/minds14, "main" for imdb.
                                Defaults to the default configuration if not specified.
         split (str, optional): The specific data split to sample from, such as 'train',
                               'validation', or 'test'. Use get_dataset_splits() to see
