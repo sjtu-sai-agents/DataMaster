@@ -1,12 +1,25 @@
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python">
+</p>
+
+<p align="center">
+  <a href="README_CN.md">中文</a> | English
+</p>
+
 # DataMaster
 
 Official code for DataMaster: Data-centric Autonomous AI Research (https://arxiv.org/abs/2605.10906).
+
+---
 
 ## Overview
 
 DataMaster focuses on the data side of machine learning problem solving. Given a fixed modeling algorithm or starter solution, it searches for better data pipelines, external data sources, feature transformations, validation signals, and reusable data artifacts. It targets both MLE-Bench (competition-style ML tasks) and PostTrainBench (post-training enhancement tasks such as math, reasoning, and domain-specific fine-tuning). 
 
 The framework organizes data-engineering decisions with a DataTree. Red nodes explore potentially useful external data or data transformations, black nodes exploit and refine selected candidates, the Data Pool stores reusable candidate datasets, and Global Memory keeps outcomes that can inform later search rounds. Downstream validation feedback is used to decide which data-side changes should be expanded. DataMaster is built on top of EvoMaster: https://github.com/sjtu-sai-agents/EvoMaster
+
+---
 
 ## Release Scope
 
@@ -20,6 +33,8 @@ DataMaster is designed to support both **MLE-Bench** and **PostTrainBench** work
 
 **PostTrainBench** support is part of the DataMaster roadmap. PostTrainBench-related code will be released in a future update.
 
+---
+
 ## Key Features
 
 - DataTree search for iterative data-engineering workflows.
@@ -29,6 +44,32 @@ DataMaster is designed to support both **MLE-Bench** and **PostTrainBench** work
 - Global Memory for reusable outcomes across search rounds.
 - MLE-Bench and PostTrainBench task execution with validation feedback.
 - Configurable local or Docker-backed execution through EvoMaster sessions.
+
+---
+
+## Repository Structure
+
+```text
+DataMaster/
+├── configs/
+│   ├── ml_master/              # Baseline agent configs
+│   └── data_master/            # DataTree configs + 75 task configs
+├── docs/                       # English and Chinese documentation
+├── evomaster/                  # EvoMaster core components
+├── initial_code/               # Starter-code templates
+├── mle-bench/                  # Benchmark integration and tooling
+├── playground/
+│   ├── ml_master/              # Baseline MLE-Bench workflow
+│   ├── data_master/            # Main DataTree workflow
+│   └── search_dataset_tools/   # Dataset search & submission tools
+├── scripts/                    # Utility and visualization scripts
+├── run.py                      # Main CLI entry point
+├── pyproject.toml
+├── requirements.txt
+└── LICENSE
+```
+
+---
 
 ## Installation
 
@@ -48,6 +89,8 @@ python -m pip install -e . --no-deps
 python -m pip install -r requirements.txt
 ```
 
+---
+
 ## Configuration
 
 DataMaster configs live under `configs/ml_master/` and `configs/data_master/`. Task-specific MLE-Bench Lite configs are under `configs/data_master/yaml_configs/`, with matching MCP tool configs under `configs/data_master/json_configs/`.
@@ -63,6 +106,8 @@ export LLM_BASE_URL=https://your-llm-endpoint/v1
 export SERPER_API_KEY=optional-serper-key
 export HF_TOKEN=optional-huggingface-token
 ```
+
+---
 
 ## Quick Start
 
@@ -91,6 +136,8 @@ python run.py \
   --initial-code initial_code/data_loader_format/detecting-insults-in-social-commentary/full_code.py
 ```
 
+---
+
 ## Main Scripts
 
 - `run.py`: main command-line entry point for DataMaster and EvoMaster playgrounds.
@@ -100,21 +147,42 @@ python run.py \
 - `scripts/check_port_conflicts.py`: utility for diagnosing local grading-server ports.
 - `scripts/vis_node_by_tree_with_grade.py`: interactive DataTree visualization with grading feedback.
 
+---
+
 ## MLE-Bench Setup
 
 Benchmark datasets, Kaggle data, generated submissions, checkpoints, and run artifacts are not stored in this repository. Prepare MLE-Bench or MLE-Bench Lite separately and point `DATA_ROOT` or `MLE_BENCH_DATA_DIR` to the local benchmark directory. The vendored `mle-bench/` directory is kept for benchmark integration code and reference tooling.
+
+---
+
+## Roadmap
+
+| Item | Status |
+|---|---|
+| MLE-Bench / MLE-Bench Lite workflow | Released |
+| PostTrainBench workflow | Coming soon |
+| Additional documentation and examples | In progress |
+| Reproducibility scripts and benchmarks | Planned |
+
+---
 
 ## Security
 
 No credentials are intentionally included. Do not commit API keys, tokens, webhooks, SSH keys, `.env` files, benchmark data, generated submissions, model checkpoints, run logs, or private service configuration. Use environment variables or local untracked config files for secrets and deployment-specific paths.
 
+---
+
 ## Citation
 
 Citation information will be added once the paper is publicly available.
 
+---
+
 ## Acknowledgements
 
 DataMaster builds on EvoMaster and reuses EvoMaster's core agent and runtime abstractions. We thank the EvoMaster project for the upstream framework: https://github.com/sjtu-sai-agents/EvoMaster
+
+---
 
 ## License
 
