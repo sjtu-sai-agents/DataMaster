@@ -1,6 +1,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python">
+  <a href="https://arxiv.org/abs/2605.10906"><img src="https://img.shields.io/badge/arXiv-2605.10906-b31b1b.svg" alt="arXiv"></a>
 </p>
 
 <p align="center">
@@ -13,7 +14,7 @@ Official code for DataMaster: Data-centric Autonomous AI Research (https://arxiv
 
 ---
 
-## Overview
+## 📖 Overview
 
 DataMaster focuses on the data side of machine learning problem solving. Given a fixed modeling algorithm or starter solution, it searches for better data pipelines, external data sources, feature transformations, validation signals, and reusable data artifacts. It targets both MLE-Bench (competition-style ML tasks) and PostTrainBench (post-training enhancement tasks such as math, reasoning, and domain-specific fine-tuning). 
 
@@ -21,7 +22,7 @@ The framework organizes data-engineering decisions with a DataTree. Red nodes ex
 
 ---
 
-## Release Scope
+## 📦 Release Scope
 
 DataMaster is designed to support both **MLE-Bench** and **PostTrainBench** workflows. The current open-source release includes the MLE-Bench workflow code:
 
@@ -35,7 +36,7 @@ DataMaster is designed to support both **MLE-Bench** and **PostTrainBench** work
 
 ---
 
-## Key Features
+## ✨ Key Features
 
 - DataTree search for iterative data-engineering workflows.
 - Red nodes for data exploration and candidate acquisition.
@@ -47,7 +48,7 @@ DataMaster is designed to support both **MLE-Bench** and **PostTrainBench** work
 
 ---
 
-## Repository Structure
+## 🏗️ Repository Structure
 
 ```text
 DataMaster/
@@ -71,7 +72,7 @@ DataMaster/
 
 ---
 
-## Installation
+## 💿 Installation
 
 ```bash
 git clone https://github.com/zhifan-zhou/DataMaster.git
@@ -91,7 +92,7 @@ python -m pip install -r requirements.txt
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 DataMaster configs live under `configs/ml_master/` and `configs/data_master/`. Task-specific MLE-Bench Lite configs are under `configs/data_master/yaml_configs/`, with matching MCP tool configs under `configs/data_master/json_configs/`.
 
@@ -109,7 +110,7 @@ export HF_TOKEN=optional-huggingface-token
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 Prepare an MLE-Bench or MLE-Bench Lite task directory locally, then run a DataTree workflow with a task-specific config:
 
@@ -138,7 +139,7 @@ python run.py \
 
 ---
 
-## Main Scripts
+## 📜 Main Scripts
 
 - `run.py`: main command-line entry point for DataMaster and EvoMaster playgrounds.
 - `scripts/auto_config_exp.py`: helper for generating task-specific DataMaster configs.
@@ -149,13 +150,13 @@ python run.py \
 
 ---
 
-## MLE-Bench Setup
+## 🧪 MLE-Bench Setup
 
 Benchmark datasets, Kaggle data, generated submissions, checkpoints, and run artifacts are not stored in this repository. Prepare MLE-Bench or MLE-Bench Lite separately and point `DATA_ROOT` or `MLE_BENCH_DATA_DIR` to the local benchmark directory. The vendored `mle-bench/` directory is kept for benchmark integration code and reference tooling.
 
 ---
 
-## Roadmap
+## 🗺️ Roadmap
 
 | Item | Status |
 |---|---|
@@ -166,24 +167,24 @@ Benchmark datasets, Kaggle data, generated submissions, checkpoints, and run art
 
 ---
 
-## Security
+## 🔒 Security
 
 No credentials are intentionally included. Do not commit API keys, tokens, webhooks, SSH keys, `.env` files, benchmark data, generated submissions, model checkpoints, run logs, or private service configuration. Use environment variables or local untracked config files for secrets and deployment-specific paths.
 
 ---
 
-## Citation
+## 📝 Citation
 
 Citation information will be added once the paper is publicly available.
 
 ---
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 DataMaster builds on EvoMaster and reuses EvoMaster's core agent and runtime abstractions. We thank the EvoMaster project for the upstream framework: https://github.com/sjtu-sai-agents/EvoMaster
 
 ---
 
-## License
+## 📄 License
 
 This repository is released under the Apache License 2.0. See `LICENSE` for details.
