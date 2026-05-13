@@ -8,6 +8,18 @@ DataMaster focuses on the data side of machine learning problem solving. Given a
 
 The framework organizes data-engineering decisions with a DataTree. Red nodes explore potentially useful external data or data transformations, black nodes exploit and refine selected candidates, the Data Pool stores reusable candidate datasets, and Global Memory keeps outcomes that can inform later search rounds. Downstream validation feedback is used to decide which data-side changes should be expanded.
 
+## Release Scope
+
+The current open-source release focuses on the **MLE-Bench / MLE-Bench Lite** workflow. It includes:
+
+- DataMaster core workflow with DataTree search (`playground/ml_master_datatree`)
+- Baseline MLE-Bench style workflow (`playground/ml_master`)
+- Data-side search tools (`playground/search_dataset_tools`)
+- MLE-Bench integration code (`mle-bench/`)
+- Task-specific MLE-Bench Lite configs under `configs/`
+
+**PostTrainBench** is part of the DataMaster research roadmap and will be released in a future update.
+
 ## Relationship to EvoMaster
 
 DataMaster is built on top of EvoMaster. EvoMaster provides the core agent, runtime, tool, session, skill, and playground abstractions. This repository keeps the necessary EvoMaster core components and adds DataMaster-specific MLE-Bench playgrounds, data-side search tools, DataTree workflows, and MLE-Bench Lite experiment configuration.
@@ -38,7 +50,6 @@ DataMaster/
 |-- playground/
 |   |-- ml_master/
 |   |-- ml_master_datatree/
-|   |-- ml_master_datatree_v2/
 |   `-- search_dataset_tools/
 |-- scripts/
 |-- run.py
