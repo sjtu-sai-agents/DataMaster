@@ -4,7 +4,7 @@ from pathlib import Path
 
 from werkzeug.serving import make_server
 
-from search_dataset_tools.operate_submission._submission_utils import _create_app
+from playground.search_dataset_tools.operate_submission._submission_utils import _create_app
 
 logging.basicConfig(
     level=logging.INFO,

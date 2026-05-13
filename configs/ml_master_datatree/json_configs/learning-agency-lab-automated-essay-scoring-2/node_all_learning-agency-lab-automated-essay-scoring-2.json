@@ -3,7 +3,7 @@
     "operate_submission_for_initial": {
       "command": "python",
       "args": [
-        "search_dataset_tools/operate_submission/for_initial_exp.py"
+        "playground/search_dataset_tools/operate_submission/for_initial_exp.py"
       ],
       "env": {
         "ML_MASTER_DATA_ROOT": "${DATA_ROOT}",
@@ -14,7 +14,7 @@
     "operate_submission": {
       "command": "python",
       "args": [
-        "search_dataset_tools/operate_submission/for_datanode.py"
+        "playground/search_dataset_tools/operate_submission/for_datanode.py"
       ],
       "env": {
         "ML_MASTER_DATA_ROOT": "${DATA_ROOT}",
@@ -25,7 +25,7 @@
     "memory_tree": {
       "command": "python",
       "args": [
-        "search_dataset_tools/memory_tree_interface.py"
+        "playground/search_dataset_tools/memory_tree_interface.py"
       ],
       "env": {
         "ML_MASTER_DATA_ROOT": "${DATA_ROOT}",
@@ -36,7 +36,7 @@
     "search_web": {
       "command": "python",
       "args": [
-        "search_dataset_tools/search_web.py"
+        "playground/search_dataset_tools/search_web.py"
       ],
       "env": {
         "SERPER_API_KEY": "${SERPER_API_KEY}"
@@ -45,7 +45,7 @@
     "search_github": {
       "command": "python",
       "args": [
-        "search_dataset_tools/search_github.py"
+        "playground/search_dataset_tools/search_github.py"
       ],
       "env": {
         "GITHUB_TOKEN": ""
@@ -54,7 +54,7 @@
     "search_huggingface": {
       "command": "python",
       "args": [
-        "search_dataset_tools/search_huggingface.py"
+        "playground/search_dataset_tools/search_huggingface.py"
       ],
       "env": {
         "HF_TOKEN": "${HF_TOKEN}",
@@ -65,7 +65,7 @@
     "search_scholar": {
       "command": "python",
       "args": [
-        "search_dataset_tools/search_scholar.py"
+        "playground/search_dataset_tools/search_scholar.py"
       ],
       "env": {
         "SERPER_API_KEY": "${SERPER_API_KEY}"

@@ -3,7 +3,7 @@
     "operate_submission_for_initial": {
       "command": "python",
       "args": [
-        "search_dataset_tools/operate_submission/for_initial_exp.py"
+        "playground/search_dataset_tools/operate_submission/for_initial_exp.py"
       ],
       "env": {
         "ML_MASTER_DATA_ROOT": "${DATA_ROOT}",
@@ -14,7 +14,7 @@
     "memory_tree": {
       "command": "python",
       "args": [
-        "search_dataset_tools/memory_tree_interface.py"
+        "playground/search_dataset_tools/memory_tree_interface.py"
       ],
       "env": {
         "ML_MASTER_DATA_ROOT": "${DATA_ROOT}",

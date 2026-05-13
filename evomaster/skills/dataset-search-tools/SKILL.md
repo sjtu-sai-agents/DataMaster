@@ -6,7 +6,7 @@ license: Complete terms in LICENSE.txt
 
 # Dataset Search Tools
 
-Search, inspect, and download datasets from HuggingFace Hub, GitHub, Google, and academic papers. All operations available as CLI scripts under `scripts/`. Source implementations copied from `search_dataset_tools/`.
+Search, inspect, and download datasets from HuggingFace Hub, GitHub, Google, and academic papers. All operations available as CLI scripts under `scripts/`. Source implementations copied from `playground/search_dataset_tools/`.
 
 Download target: `{workspace}/data_links/`
 

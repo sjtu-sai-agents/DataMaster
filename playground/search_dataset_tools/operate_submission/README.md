@@ -5,7 +5,7 @@
 - `run_code`: 运行代码，得到控制台结果
 - `validate_submission`: 验证代码的提交是否合法
 - `grade_code`: 打分评价获得测试集分数
-- `read_code`: 输出 `code_{node_id}_dataloader.py` 和 `code_{node_id}_template.py` 的文件内容 + Base Data Loader 的定义（不包含在文件中，但是硬编码，需要读取 ${PROJECT_ROOT}/search_dataset_tools/operate_submission/base_dataloader.py 文件路径进行读取）
+- `read_code`: 输出 `code_{node_id}_dataloader.py` 和 `code_{node_id}_template.py` 的文件内容 + Base Data Loader 的定义（不包含在文件中，但是硬编码，需要读取 ${PROJECT_ROOT}/playground/search_dataset_tools/operate_submission/base_dataloader.py 文件路径进行读取）
 
 ## For red & black node exp
 

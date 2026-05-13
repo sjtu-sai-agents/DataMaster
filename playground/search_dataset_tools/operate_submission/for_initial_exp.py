@@ -1,6 +1,6 @@
-"""MCP tools for Black/Red nodes - operates on DataLoader files ONLY.
+"""MCP tools for Initial node - operates on both template and dataloader files.
 
-Black/Red 节点只能修改 dataloader 文件，template 是从父节点继承的，只读不可修改。
+Initial 节点可以修改 template 和 dataloader 两个文件。
 """
 
 import asyncio
@@ -9,7 +9,7 @@ from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 
-from _submission_utils import (
+from playground.search_dataset_tools.operate_submission._submission_utils import (
     _get_dataloader_file_path,
     _get_template_file_path,
     _get_base_dataloader_path,
@@ -21,16 +21,13 @@ from _submission_utils import (
 )
 
 logger = logging.getLogger(__name__)
-mcp = FastMCP("operate-submission-datanode")
+mcp = FastMCP("operate-submission-initial")
 logging.basicConfig(level=logging.INFO)
 
 
 @mcp.tool()
 def read_code(node_id: str, workspace: str) -> str:
-    """读取所有代码组件：base_dataloader + dataloader + template。
-    
-    Black/Red 节点注意：你只能修改 dataloader 文件！template 是只读的！
-    """
+    """读取所有代码组件：base_dataloader + dataloader + template。"""
     try:
         _validate_workspace(workspace)
         parts = []
@@ -43,18 +40,18 @@ def read_code(node_id: str, workspace: str) -> str:
         
         parts.append("")
         
-        # Dataloader (MODIFIABLE)
+        # Dataloader
         dataloader_path = _get_dataloader_file_path(node_id, workspace)
         if dataloader_path.exists():
-            parts.append("===== MY DATALOADER (可修改) =====")
+            parts.append("===== MY DATALOADER =====")
             parts.append(dataloader_path.read_text(encoding="utf-8"))
         
         parts.append("")
         
-        # Template (READ-ONLY)
+        # Template
         template_path = _get_template_file_path(node_id, workspace)
         if template_path.exists():
-            parts.append("===== TEMPLATE (只读，从父节点继承) =====")
+            parts.append("===== TEMPLATE =====")
             parts.append(template_path.read_text(encoding="utf-8"))
         
         return "\n".join(parts)
@@ -64,50 +61,72 @@ def read_code(node_id: str, workspace: str) -> str:
 
 
 @mcp.tool()
-def write_code(code: str, node_id: str, workspace: str, override: bool = False) -> str:
-    """写入 DataLoader 代码。
+def write_code(code: str, node_id: str, workspace: str, file_type: str = "dataloader", override: bool = False) -> str:
+    """写入代码（template 或 dataloader）。
 
-    ⚠️ 只能写入 dataloader 文件，不能修改 template！
+    Args:
+        code: Python 代码字符串
+        node_id: 节点 ID
+        workspace: 工作目录
+        file_type: "template" 或 "dataloader"（默认）
+        override: 是否覆盖已有内容
     """
     try:
         _validate_workspace(workspace)
-        dataloader_path = _get_dataloader_file_path(node_id, workspace)
-        dataloader_path.parent.mkdir(parents=True, exist_ok=True)
+        if file_type == "template":
+            file_path = _get_template_file_path(node_id, workspace)
+        elif file_type == "dataloader":
+            file_path = _get_dataloader_file_path(node_id, workspace)
+        else:
+            return f"Error: file_type 必须是 'template' 或 'dataloader'，得到：{file_type}"
         
-        if not override and dataloader_path.exists():
-            content = dataloader_path.read_text(encoding="utf-8")
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if not override and file_path.exists():
+            content = file_path.read_text(encoding="utf-8")
             if content:
-                return f"Warning: dataloader 已有内容\n{content}\n\n如需覆盖请设置 override=True"
+                return f"Warning: {file_type} 已有内容\n{content}\n\n如需覆盖请设置 override=True"
         
-        dataloader_path.write_text(code, encoding="utf-8")
-        return f"Dataloader 写入成功：{dataloader_path}"
+        file_path.write_text(code, encoding="utf-8")
+        return f"{file_type.capitalize()} 写入成功：{file_path}"
     except Exception as e:
         logger.error(str(e))
         return str(e)
 
 
 @mcp.tool()
-def fix_code(old_string: str, new_string: str, node_id: str, workspace: str, replace_all: bool = False) -> str:
-    """修改 DataLoader 代码。
+def fix_code(old_string: str, new_string: str, node_id: str, workspace: str, file_type: str = "dataloader", replace_all: bool = False) -> str:
+    """修改代码（template 或 dataloader）。
 
-    ⚠️ 只能修改 dataloader 文件，不能修改 template！
+    Args:
+        old_string: 要替换的原始字符串
+        new_string: 新字符串
+        node_id: 节点 ID
+        workspace: 工作目录
+        file_type: "template" 或 "dataloader"（默认）
+        replace_all: 是否替换所有匹配项
     """
     try:
         _validate_workspace(workspace)
-        dataloader_path = _get_dataloader_file_path(node_id, workspace)
+        if file_type == "template":
+            file_path = _get_template_file_path(node_id, workspace)
+        elif file_type == "dataloader":
+            file_path = _get_dataloader_file_path(node_id, workspace)
+        else:
+            return f"Error: file_type 必须是 'template' 或 'dataloader'，得到：{file_type}"
         
-        if not dataloader_path.exists():
-            return f"Dataloader 文件不存在：{dataloader_path}"
+        if not file_path.exists():
+            return f"{file_type.capitalize()} 文件不存在：{file_path}"
         
-        content = dataloader_path.read_text(encoding="utf-8")
+        content = file_path.read_text(encoding="utf-8")
         
         if old_string not in content:
             return f"未找到指定的代码片段：{old_string[:50]}..."
         
         new_content = content.replace(old_string, new_string, -1 if replace_all else 1)
-        dataloader_path.write_text(new_content, encoding="utf-8")
+        file_path.write_text(new_content, encoding="utf-8")
         
-        return "Dataloader 代码修改成功"
+        return f"{file_type.capitalize()} 代码修改成功"
     except Exception as e:
         logger.error(str(e))
         return str(e)

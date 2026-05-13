@@ -41,7 +41,7 @@ class NodeExp(BaseExp):
         # ========== Test-feedback 模式：使用测试集分数 ==========
         if self.test_feedback and self.test_metric_agent:
             # 获取测试集分数
-            from search_dataset_tools.operate_submission._submission_utils import grade_code_sync
+            from playground.search_dataset_tools.operate_submission._submission_utils import grade_code_sync
 
             grade_result = grade_code_sync(
                 node_id=self.node.id,

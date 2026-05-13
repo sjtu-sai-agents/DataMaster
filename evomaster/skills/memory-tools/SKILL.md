@@ -103,7 +103,7 @@ All commands require `-w /path/to/workspace`. Node-specific commands also requir
 
 ```
 scripts/
-├── memory_tree.py            # Core implementation (from search_dataset_tools/)
-├── memory_tree_interface.py  # MCP interface (from search_dataset_tools/)
+├── memory_tree.py            # Core implementation (from playground/search_dataset_tools/)
+├── memory_tree_interface.py  # MCP interface (from playground/search_dataset_tools/)
 └── memory_cli.py             # CLI wrapper
 ```

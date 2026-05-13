@@ -38,9 +38,9 @@ DataMaster/
 |-- playground/
 |   |-- ml_master/
 |   |-- ml_master_datatree/
-|   `-- ml_master_datatree_v2/
+|   |-- ml_master_datatree_v2/
+|   `-- search_dataset_tools/
 |-- scripts/
-|-- search_dataset_tools/
 |-- run.py
 |-- pyproject.toml
 |-- requirements.txt
@@ -116,6 +116,7 @@ python run.py \
 - `scripts/build_full_initial_codes.py`: helper for assembling starter-code manifests.
 - `scripts/prefetch_models.py`: optional helper for local model preparation.
 - `scripts/check_port_conflicts.py`: utility for diagnosing local grading-server ports.
+- `scripts/vis_node_by_tree_with_grade.py`: interactive DataTree visualization with grading feedback.
 
 ## MLE-Bench Setup
 

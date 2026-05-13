@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 import logging
 
-from memory_tree import (
+from playground.search_dataset_tools.memory_tree import (
     read_node_manifest,
     write_node_manifest,
     list_child_nodes,

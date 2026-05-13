@@ -12,7 +12,7 @@ from ..utils.runtime import (
     run_code_via_bash,
 )
 
-from search_dataset_tools.operate_submission._submission_utils import _assemble_code
+from playground.search_dataset_tools.operate_submission._submission_utils import _assemble_code
 
 
 logger = logging.getLogger(__name__)

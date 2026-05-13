@@ -28,7 +28,7 @@ workspace/memory_tree/
 
 ## 核心文件
 
-### 1. `search_dataset_tools/memory_tree.py` - 核心模块
+### 1. `playground/search_dataset_tools/memory_tree.py` - 核心模块
 
 提供以下功能：
 
@@ -147,7 +147,7 @@ write_node_manifest(
 运行测试脚本验证功能：
 
 ```bash
-python search_dataset_tools/test_memory_tree.py
+python playground/search_dataset_tools/test_memory_tree.py
 ```
 
 所有测试应通过，输出：

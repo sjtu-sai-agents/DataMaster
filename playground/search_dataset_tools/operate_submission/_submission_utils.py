@@ -562,9 +562,10 @@ def ensure_grading_server(
             logger.warning("Configured grading server url missing port: %s", target_url)
             return ""
 
-        project_root = Path(__file__).resolve().parents[2]
+        project_root = Path(__file__).resolve().parents[3]
         runner_path = (
             project_root
+            / "playground"
             / "search_dataset_tools"
             / "operate_submission"
             / "grading_server_runner.py"
@@ -688,7 +689,7 @@ def _get_base_dataloader_path() -> Path:
     """Get the path to the base dataloader file.
 
     The base dataloader file contains the BaseDataLoader abstract class
-    and is located at search_dataset_tools/operate_submission/base_dataloader.py.
+    and is located at playground/search_dataset_tools/operate_submission/base_dataloader.py.
     """
     return Path(__file__).resolve().parent / "base_dataloader.py"
     
