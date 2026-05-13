@@ -1,12 +1,12 @@
 # DataMaster
 
-DataMaster is an EvoMaster-based autonomous data-engineering framework designed for both **MLE-Bench** and **PostTrainBench** machine learning workflows.
+Official code for DataMaster: Data-centric Autonomous AI Research (https://arxiv.org/abs/2605.10906).
 
 ## Overview
 
-DataMaster focuses on the data side of machine learning problem solving. Given a fixed modeling algorithm or starter solution, it searches for better data pipelines, external data sources, feature transformations, validation signals, and reusable data artifacts. It targets both MLE-Bench (competition-style ML tasks) and PostTrainBench (post-training enhancement tasks such as math, reasoning, and domain-specific fine-tuning).
+DataMaster focuses on the data side of machine learning problem solving. Given a fixed modeling algorithm or starter solution, it searches for better data pipelines, external data sources, feature transformations, validation signals, and reusable data artifacts. It targets both MLE-Bench (competition-style ML tasks) and PostTrainBench (post-training enhancement tasks such as math, reasoning, and domain-specific fine-tuning). 
 
-The framework organizes data-engineering decisions with a DataTree. Red nodes explore potentially useful external data or data transformations, black nodes exploit and refine selected candidates, the Data Pool stores reusable candidate datasets, and Global Memory keeps outcomes that can inform later search rounds. Downstream validation feedback is used to decide which data-side changes should be expanded.
+The framework organizes data-engineering decisions with a DataTree. Red nodes explore potentially useful external data or data transformations, black nodes exploit and refine selected candidates, the Data Pool stores reusable candidate datasets, and Global Memory keeps outcomes that can inform later search rounds. Downstream validation feedback is used to decide which data-side changes should be expanded. DataMaster is built on top of EvoMaster: https://github.com/sjtu-sai-agents/EvoMaster
 
 ## Release Scope
 
@@ -20,12 +20,6 @@ DataMaster is designed to support both **MLE-Bench** and **PostTrainBench** work
 
 **PostTrainBench** support is part of the DataMaster roadmap. PostTrainBench-related code will be released in a future update.
 
-## Relationship to EvoMaster
-
-DataMaster is built on top of EvoMaster. EvoMaster provides the core agent, runtime, tool, session, skill, and playground abstractions. This repository keeps the necessary EvoMaster core components and adds DataMaster-specific playgrounds, data-side search tools, DataTree workflows, and experiment configuration for MLE-Bench and PostTrainBench.
-
-Upstream EvoMaster: https://github.com/sjtu-sai-agents/EvoMaster
-
 ## Key Features
 
 - DataTree search for iterative data-engineering workflows.
@@ -35,29 +29,6 @@ Upstream EvoMaster: https://github.com/sjtu-sai-agents/EvoMaster
 - Global Memory for reusable outcomes across search rounds.
 - MLE-Bench and PostTrainBench task execution with validation feedback.
 - Configurable local or Docker-backed execution through EvoMaster sessions.
-
-## Repository Structure
-
-```text
-DataMaster/
-|-- configs/
-|   |-- ml_master/
-|   `-- data_master/
-|-- docs/
-|-- evomaster/
-|-- initial_code/
-|-- mle-bench/
-|-- playground/
-|   |-- ml_master/
-|   |-- data_master/
-|   `-- search_dataset_tools/
-|-- scripts/
-|-- run.py
-|-- pyproject.toml
-|-- requirements.txt
-|-- LICENSE
-`-- README.md
-```
 
 ## Installation
 
