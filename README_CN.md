@@ -12,51 +12,64 @@
   中文 | <a href="README.md">English</a>
 </p>
 
-# DataMaster: Towards Autonomous Data Engineering for Machine Learning
-
----
+<h1 align="center">DataMaster</h1>
+<p align="center"><em>Towards Autonomous Data Engineering for Machine Learning</em></p>
 
 <p align="center">
-  <img src="docs/main.png" alt="DataMaster 框架总览" width="800">
+  <img src="docs/main.png" alt="DataMaster 框架总览" width="780">
+  <br><sub><b>图 1.</b> DataMaster 自主数据工程框架总览。</sub>
 </p>
 
 ---
 
 ## 📖 项目概览
 
-DataMaster 聚焦于机器学习问题中的数据侧优化。在固定建模算法或初始方案的前提下，自动搜索更优的数据流水线、外部数据源、特征变换、验证信号以及可复用的数据工件。框架同时面向 MLE-Bench（竞赛式机器学习任务）和 PostTrainBench（后训练增强任务，如数学推理、领域微调等）。
+DataMaster 聚焦于机器学习问题的**数据侧优化**。在固定建模算法或初始方案的前提下，自动搜索更优的数据流水线、外部数据源、特征变换、验证信号以及可复用的数据工件。框架同时面向 **MLE-Bench**（竞赛式机器学习任务）和 **PostTrainBench**（后训练增强：数学推理、领域微调等）。
 
-框架通过 DataTree（数据树）组织数据工程决策：红节点探索潜在有用的外部数据或数据变换，黑节点利用和优化已选候选对象，Data Pool（候选数据池）存储可复用的候选数据集，Global Memory（全局记忆）保存可供后续搜索轮次参考的结果。下游验证反馈用于决定哪些数据侧变更值得进一步扩展。DataMaster 构建于 EvoMaster 之上：https://github.com/sjtu-sai-agents/EvoMaster
+框架通过 **DataTree（数据树）** 组织数据工程决策：**红节点**探索外部数据或数据变换，**黑节点**利用和优化候选对象，**Data Pool（候选数据池）** 存储可复用数据集，**Global Memory（全局记忆）** 跨搜索轮次保留结果。DataMaster 构建于 [EvoMaster](https://github.com/sjtu-sai-agents/EvoMaster) 之上。
 
 ---
 
 ## 📦 发布范围
 
-DataMaster 同时面向 **MLE-Bench** 和 **PostTrainBench** 工作流设计。当前开源版本包含 MLE-Bench 工作流代码：
+DataMaster 同时面向 **MLE-Bench** 和 **PostTrainBench** 工作流设计。当前开源版本包含 MLE-Bench 工作流：
 
-- DataMaster 核心 DataTree 搜索工作流（`playground/data_master`）
-- MLE-Bench 基线工作流（`playground/ml_master`）
-- 数据侧搜索工具（`playground/search_dataset_tools`）
-- MLE-Bench 集成代码（`mle-bench/`）
-- `configs/` 下的 MLE-Bench Lite 任务配置
+| 组件 | 路径 |
+|---|---|
+| DataTree 核心工作流 | `playground/data_master` |
+| MLE-Bench 基线工作流 | `playground/ml_master` |
+| 数据集搜索与提交工具 | `playground/search_dataset_tools` |
+| Benchmark 集成 | `mle-bench/` |
+| 任务特定配置（75 个任务） | `configs/data_master/` |
 
-**PostTrainBench** 支持已纳入 DataMaster 路线图，相关代码将在后续版本中发布。
+> **PostTrainBench** 已纳入路线图，相关代码将在后续版本中发布。
 
 ---
 
 ## ✨ 核心特性
 
-- **DataTree 搜索** — 基于树结构的可执行数据状态迭代搜索。
-- **红节点** — 外部数据发现与候选数据源获取。
-- **黑节点** — 数据清洗、精炼、适配与 DataLoader 构建。
-- **Data Pool（候选数据池）** — 跨搜索分支共享的候选数据集层。
-- **Global Memory（全局记忆）** — 跨轮次存储节点结果、工件与可复用发现。
-- **MLE-Bench & PostTrainBench** — 验证驱动的任务执行与可配置反馈。
+<table>
+<tr>
+<td width="50%">
 
----
+- 🌲 **DataTree 搜索** — 基于树结构的可执行数据状态迭代搜索
+- 🔴 **红节点** — 外部数据发现与候选数据源获取
+- ⚫ **黑节点** — 数据清洗、精炼、适配与 DataLoader 构建
+
+</td>
+<td width="50%">
+
+- 🗄️ **Data Pool（候选数据池）** — 跨搜索分支共享的候选数据集层
+- 🧠 **Global Memory（全局记忆）** — 跨轮次存储节点结果、工件与可复用发现
+- 🎯 **验证反馈** — MLE-Bench 与 PostTrainBench 任务执行与可配置评估
+
+</td>
+</tr>
+</table>
 
 <p align="center">
-  <img src="docs/data_master_walkthrough.png" alt="DataMaster 流程总览" width="800">
+  <img src="docs/data_master_walkthrough.png" alt="DataMaster 流程总览" width="780">
+  <br><sub><b>图 2.</b> DataTree 搜索流程总览：红节点探索，黑节点利用。</sub>
 </p>
 
 ---
@@ -92,44 +105,34 @@ git clone https://github.com/zhifan-zhou/DataMaster.git
 cd DataMaster
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e .
+pip install -e .
 ```
 
-如果你的环境不需要完整的 benchmark 依赖栈，可以先安装包元数据，再按需添加任务特定依赖：
-
-```bash
-python -m pip install -e . --no-deps
-python -m pip install -r requirements.txt
-```
+> **注意：** Python >= 3.10, < 3.13 版本要求。
 
 ---
 
 ## ⚙️ 配置说明
 
-DataMaster 配置文件位于 `configs/ml_master/` 和 `configs/data_master/`。任务特定的 MLE-Bench Lite YAML 配置位于 `configs/data_master/yaml_configs/`，配套的 MCP 工具配置位于 `configs/data_master/json_configs/`。
+配置文件位于 `configs/ml_master/` 和 `configs/data_master/`。任务特定的 YAML 配置位于 `configs/data_master/yaml_configs/`，MCP 工具配置位于 `configs/data_master/json_configs/`。
 
-本仓库不包含任何凭据。请通过环境变量或本地未跟踪的配置文件提供密钥和私有端点。常用环境变量包括：
+本仓库**不**包含任何凭据。请通过环境变量提供密钥：
 
 ```bash
 export DATA_ROOT=/path/to/mle-bench-lite
-export MLE_BENCH_DATA_DIR="$DATA_ROOT"
 export LLM_MODEL=your-model-name
 export LLM_API_KEY=your-api-key
 export LLM_BASE_URL=https://your-llm-endpoint/v1
-export SERPER_API_KEY=optional-serper-key
-export HF_TOKEN=optional-huggingface-token
+export SERPER_API_KEY=optional-serper-key     # 网络搜索
+export HF_TOKEN=optional-huggingface-token    # 数据集搜索
 ```
 
 ---
 
 ## 🚀 快速开始
 
-准备本地 MLE-Bench 或 MLE-Bench Lite 任务目录，然后使用任务特定配置运行 DataTree 工作流：
-
 ```bash
 export DATA_ROOT=/path/to/mle-bench-lite
-export MLE_BENCH_DATA_DIR="$DATA_ROOT"
 export LLM_MODEL=your-model-name
 export LLM_API_KEY=your-api-key
 export LLM_BASE_URL=https://your-llm-endpoint/v1
@@ -140,7 +143,7 @@ python run.py \
   --task "$DATA_ROOT/detecting-insults-in-social-commentary/prepared/public/description.md"
 ```
 
-使用 `--initial-code` 为初始节点提供种子方案：
+使用初始方案代码：
 
 ```bash
 python run.py \
@@ -154,18 +157,20 @@ python run.py \
 
 ## 📜 主要脚本
 
-- `run.py`：DataMaster 和 EvoMaster Playground 的命令行入口。
-- `scripts/auto_config_exp.py`：用于生成任务特定 DataMaster 配置的辅助脚本。
-- `scripts/build_full_initial_codes.py`：用于组装初始代码清单的辅助脚本。
-- `scripts/prefetch_models.py`：可选的本地模型预取辅助脚本。
-- `scripts/check_port_conflicts.py`：用于诊断本地评分服务器端口冲突的工具。
-- `scripts/vis_node_by_tree_with_grade.py`：带评分反馈的 DataTree 交互式可视化工具。
+| 脚本 | 用途 |
+|---|---|
+| `run.py` | 命令行入口 |
+| `scripts/auto_config_exp.py` | 生成任务特定配置 |
+| `scripts/build_full_initial_codes.py` | 组装初始代码清单 |
+| `scripts/prefetch_models.py` | 本地模型预取辅助 |
+| `scripts/check_port_conflicts.py` | 诊断评分服务器端口冲突 |
+| `scripts/vis_node_by_tree_with_grade.py` | DataTree 交互式可视化 |
 
 ---
 
 ## 🧪 MLE-Bench 环境准备
 
-本仓库不包含 MLE-Bench 数据集、Kaggle 竞赛数据、生成的提交文件、模型检查点或运行产物。使用者需单独准备 MLE-Bench 或 MLE-Bench Lite 环境，并将 `DATA_ROOT` 或 `MLE_BENCH_DATA_DIR` 指向本地 benchmark 目录。`mle-bench/` 目录保留了 benchmark 集成代码和参考工具。
+本仓库**不**包含 MLE-Bench 数据集、Kaggle 竞赛数据、模型检查点或生成的实验产物。使用者需单独准备 MLE-Bench / MLE-Bench Lite 环境，并将 `DATA_ROOT` 指向本地 benchmark 目录。`mle-bench/` 目录提供了集成代码和参考工具。
 
 ---
 
@@ -173,16 +178,16 @@ python run.py \
 
 | 项目 | 状态 |
 |---|---|
-| MLE-Bench / MLE-Bench Lite 工作流 | 已发布 |
-| PostTrainBench 工作流 | 即将发布 |
-| 补充文档与示例 | 进行中 |
-| 可复现性脚本与基准测试 | 计划中 |
+| MLE-Bench / MLE-Bench Lite 工作流 | ✅ 已发布 |
+| PostTrainBench 工作流 | 🔜 即将发布 |
+| 补充文档与示例 | 🚧 进行中 |
+| 可复现性脚本与基准测试 | 📋 计划中 |
 
 ---
 
 ## 🔒 安全说明
 
-本仓库不会有意包含任何凭据。请勿提交 API 密钥、token、webhook、SSH 密钥、`.env` 文件、benchmark 数据、生成的提交文件、模型检查点、运行日志或私有服务配置。请使用环境变量或本地未跟踪的配置文件管理密钥和部署相关路径。
+本仓库不会有意包含任何凭据。请勿提交 API 密钥、token、webhook、SSH 密钥、`.env` 文件、benchmark 数据、模型检查点、运行日志或私有服务配置。
 
 ---
 
@@ -191,24 +196,25 @@ python run.py \
 如果您在研究中使用了 DataMaster，请引用：
 
 ```bibtex
-@article{zhou2025datamaster,
-  title={DataMaster: Towards Autonomous Data Engineering for Machine Learning},
-  author={Zhou, Zhifan and ...},
-  journal={arXiv preprint arXiv:2605.10906},
-  year={2025}
+@article{du2026datamaster,
+  title   = {DataMaster: Towards Autonomous Data Engineering for Machine Learning},
+  author  = {Yaxin Du and Xiyuan Yang and Zhifan Zhou and Wanxu Liu and
+             Zixing Lei and Zimeng Chen and Fenyi Liu and Haotian Wu and
+             Yuzhu Cai and Zexi Liu and Xinyu Zhu and WenHao Wang and
+             Linfeng Zhang and Chen Qian and Siheng Chen},
+  journal = {arXiv preprint arXiv:2605.10906},
+  year    = {2026}
 }
 ```
-
-> **注意：** 完整作者列表将在论文正式发表后确定。请查看 [arXiv 页面](https://arxiv.org/abs/2605.10906) 获取最新版本。
 
 ---
 
 ## 🙏 致谢
 
-DataMaster 构建于 EvoMaster 之上，复用了 EvoMaster 的核心 Agent 和运行时抽象。感谢 EvoMaster 项目提供的上游框架支持：https://github.com/sjtu-sai-agents/EvoMaster
+DataMaster 构建于 [EvoMaster](https://github.com/sjtu-sai-agents/EvoMaster) 之上，复用了其核心 Agent 和运行时抽象。感谢 EvoMaster 项目提供的上游框架支持。
 
 ---
 
 ## 📄 License
 
-本仓库基于 Apache License 2.0 发布。详见 `LICENSE` 文件。
+本仓库基于 [Apache License 2.0](LICENSE) 发布。
