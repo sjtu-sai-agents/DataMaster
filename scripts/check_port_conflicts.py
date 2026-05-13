@@ -132,7 +132,7 @@ def main():
     parser.add_argument(
         "yaml_dir",
         nargs="?",
-        default="configs/ml_master_datatree/yaml_configs",
+        default="configs/data_master/yaml_configs",
         help="yaml 配置文件目录路径"
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="安静模式，只显示冲突信息")

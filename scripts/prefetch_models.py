@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
 .venv/bin/python scripts/prefetch_models.py \
-  --manifest configs/ml_master_datatree/prefetch_models.json \
-  --env-from-mcp configs/ml_master_datatree/mcp_config4data_aptos2019.json
+  --manifest configs/data_master/prefetch_models.json \
+  --env-from-mcp configs/data_master/mcp_config4data_aptos2019.json
 """
 from __future__ import annotations
 
@@ -198,7 +198,7 @@ def main() -> int:
     ap.add_argument(
         "--manifest",
         type=str,
-        default="configs/ml_master_datatree/prefetch_models.json",
+        default="configs/data_master/prefetch_models.json",
         help="Path to prefetch_models.json",
     )
     ap.add_argument(

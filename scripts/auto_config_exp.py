@@ -164,7 +164,7 @@ def generate_yaml_config(
         f.write(yaml_content)
     print(f"✓ 创建: {config_path}")
 
-    # 返回相对于 configs/ml_master_datatree 的路径
+    # 返回相对于 configs/data_master 的路径
     return f"yaml_configs/{base_exp_name}/{config_filename}"
 
 
@@ -184,8 +184,8 @@ def update_run_mle_sh(
     new_case_lines = [
         f'    "{exp_name}")',
         f"        python run.py \\",
-        f"            --agent ml_master_datatree \\",
-        f"            --config configs/ml_master_datatree/{config_name} \\",
+        f"            --agent data_master \\",
+        f"            --config configs/data_master/{config_name} \\",
         f"            --task {task_path} \\",
     ]
 
@@ -446,7 +446,7 @@ def main():
 
     # 设置路径
     project_root = Path(__file__).parent.parent
-    config_dir = project_root / "configs" / "ml_master_datatree"
+    config_dir = project_root / "configs" / "data_master"
     run_mle_sh = project_root / "run_mle.sh"
 
     grading_server = f"http://127.0.0.1:{port}"

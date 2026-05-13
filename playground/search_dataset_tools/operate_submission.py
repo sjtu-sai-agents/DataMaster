@@ -21,7 +21,7 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 try:
-    from playground.ml_master_datatree.core.utils.grading_server import ensure_grading_server
+    from playground.data_master.core.utils.grading_server import ensure_grading_server
 except Exception:  # pragma: no cover - optional dependency path
     ensure_grading_server = None
 

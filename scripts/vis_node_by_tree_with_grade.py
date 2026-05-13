@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """按 UCT 树节点可视化 trajectory - 支持 Grade 分数
 
-python vis_node_by_tree_with_grade.py --run-dir ${PROJECT_ROOT}/runs/ml_master_datatree_20260326_165235 --port 8789 --dataset leaf-classification
+python vis_node_by_tree_with_grade.py --run-dir ${PROJECT_ROOT}/runs/data_master_20260326_165235 --port 8789 --dataset leaf-classification
 
 新增功能：
 - 加载 grade_results.json 中的 test_score

@@ -5,7 +5,7 @@
 每一个节点在 memory tree 中存储的结构如下：
 
 ```text
-${PROJECT_ROOT}/runs/ml_master_datatree_20260326_165235/workspaces/task_0/memory_tree
+${PROJECT_ROOT}/runs/data_master_20260326_165235/workspaces/task_0/memory_tree
 `-- 405189dacb8d424dacc94ea9b2e030cf
     |-- 243b68bdeb6143959bca328fce03825c
     |-- 55374a4c32074bacb50c6dff0b9a0186

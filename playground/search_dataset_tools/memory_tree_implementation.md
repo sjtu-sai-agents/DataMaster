@@ -53,7 +53,7 @@ workspace/memory_tree/
 - `read_storage_file(workspace, node_id, file_name)` - 读取 storage 中的文件
 - `summarize_node_memory(workspace, node_id)` - 获取节点的完整 memory 总结
 
-### 2. `playground/ml_master_datatree/core/playground.py` - 集成点
+### 2. `playground/data_master/core/playground.py` - 集成点
 
 已集成到以下位置：
 

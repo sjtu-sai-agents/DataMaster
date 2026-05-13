@@ -12,7 +12,7 @@ The framework organizes data-engineering decisions with a DataTree. Red nodes ex
 
 The current open-source release focuses on the **MLE-Bench / MLE-Bench Lite** workflow. It includes:
 
-- DataMaster core workflow with DataTree search (`playground/ml_master_datatree`)
+- DataMaster core workflow with DataTree search (`playground/data_master`)
 - Baseline MLE-Bench style workflow (`playground/ml_master`)
 - Data-side search tools (`playground/search_dataset_tools`)
 - MLE-Bench integration code (`mle-bench/`)
@@ -42,14 +42,14 @@ Upstream EvoMaster: https://github.com/sjtu-sai-agents/EvoMaster
 DataMaster/
 |-- configs/
 |   |-- ml_master/
-|   `-- ml_master_datatree/
+|   `-- data_master/
 |-- docs/
 |-- evomaster/
 |-- initial_code/
 |-- mle-bench/
 |-- playground/
 |   |-- ml_master/
-|   |-- ml_master_datatree/
+|   |-- data_master/
 |   `-- search_dataset_tools/
 |-- scripts/
 |-- run.py
@@ -79,7 +79,7 @@ python -m pip install -r requirements.txt
 
 ## Configuration
 
-DataMaster configs live under `configs/ml_master/` and `configs/ml_master_datatree/`. Task-specific MLE-Bench Lite configs are under `configs/ml_master_datatree/yaml_configs/`, with matching MCP tool configs under `configs/ml_master_datatree/json_configs/`.
+DataMaster configs live under `configs/ml_master/` and `configs/data_master/`. Task-specific MLE-Bench Lite configs are under `configs/data_master/yaml_configs/`, with matching MCP tool configs under `configs/data_master/json_configs/`.
 
 Credentials are not included in this repository. Provide keys and private endpoints through environment variables or local untracked config files. Common variables include:
 
@@ -105,8 +105,8 @@ export LLM_API_KEY=your-api-key
 export LLM_BASE_URL=https://your-llm-endpoint/v1
 
 python run.py \
-  --agent ml_master_datatree \
-  --config configs/ml_master_datatree/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml \
+  --agent data_master \
+  --config configs/data_master/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml \
   --task "$DATA_ROOT/detecting-insults-in-social-commentary/prepared/public/description.md"
 ```
 
@@ -114,8 +114,8 @@ Use `--initial-code` when you want to seed the initial node with a starter solut
 
 ```bash
 python run.py \
-  --agent ml_master_datatree \
-  --config configs/ml_master_datatree/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml \
+  --agent data_master \
+  --config configs/data_master/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml \
   --task "$DATA_ROOT/detecting-insults-in-social-commentary/prepared/public/description.md" \
   --initial-code initial_code/data_loader_format/detecting-insults-in-social-commentary/full_code.py
 ```

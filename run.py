@@ -2,8 +2,8 @@
 """DataMaster command-line entry point.
 
 Examples:
-  python run.py --agent ml_master_datatree --config configs/ml_master_datatree/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml --task /path/to/task/description.md
-  python run.py --agent ml_master_datatree --config configs/ml_master_datatree/config_base.yaml --task-file tasks.json
+  python run.py --agent data_master --config configs/data_master/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml --task /path/to/task/description.md
+  python run.py --agent data_master --config configs/data_master/config_base.yaml --task-file tasks.json
   python run.py --agent ml_master --interactive
 """
 
@@ -29,16 +29,16 @@ def parse_args():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python run.py --agent ml_master_datatree --config configs/ml_master_datatree/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml --task /path/to/task/description.md
+  python run.py --agent data_master --config configs/data_master/yaml_configs/detecting-insults-in-social-commentary/config_detecting-insults-in-social-commentary.yaml --task /path/to/task/description.md
   python run.py --agent ml_master --interactive
-  python run.py --agent ml_master_datatree --task-file tasks.json --parallel
+  python run.py --agent data_master --task-file tasks.json --parallel
         """
     )
 
     parser.add_argument(
         "--agent",
         required=True,
-        help="Playground name, for example ml_master_datatree or ml_master"
+        help="Playground name, for example data_master or ml_master"
     )
 
     parser.add_argument(
