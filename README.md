@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="docs/data_master_logo.png" alt="DataMaster" width="520">
+</p>
+
+<p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python">
   <a href="https://arxiv.org/abs/2605.10906"><img src="https://img.shields.io/badge/arXiv-2605.10906-b31b1b.svg" alt="arXiv"></a>
@@ -8,9 +12,13 @@
   <a href="README_CN.md">中文</a> | English
 </p>
 
-# DataMaster
+# DataMaster: Towards Autonomous Data Engineering for Machine Learning
 
-Official code for DataMaster: Data-centric Autonomous AI Research (https://arxiv.org/abs/2605.10906).
+---
+
+<p align="center">
+  <img src="docs/main.png" alt="DataMaster Framework Overview" width="800">
+</p>
 
 ---
 
@@ -38,13 +46,18 @@ DataMaster is designed to support both **MLE-Bench** and **PostTrainBench** work
 
 ## ✨ Key Features
 
-- DataTree search for iterative data-engineering workflows.
-- Red nodes for data exploration and candidate acquisition.
-- Black nodes for data exploitation, cleaning, refinement, and pipeline improvement.
-- Data Pool for reusable candidate datasets and derived artifacts.
-- Global Memory for reusable outcomes across search rounds.
-- MLE-Bench and PostTrainBench task execution with validation feedback.
-- Configurable local or Docker-backed execution through EvoMaster sessions.
+- **DataTree Search** — tree-structured iterative search over executable data states.
+- **Red Nodes** — external data discovery and candidate source acquisition.
+- **Black Nodes** — data refinement, cleaning, adaptation, and DataLoader construction.
+- **Data Pool** — shared candidate dataset layer reused across search branches.
+- **Global Memory** — stores node outcomes, artifacts, and reusable findings across rounds.
+- **MLE-Bench & PostTrainBench** — validation-driven task execution with configurable feedback.
+
+---
+
+<p align="center">
+  <img src="docs/data_master_walkthrough.png" alt="DataMaster Walkthrough" width="800">
+</p>
 
 ---
 
@@ -175,7 +188,18 @@ No credentials are intentionally included. Do not commit API keys, tokens, webho
 
 ## 📝 Citation
 
-Citation information will be added once the paper is publicly available.
+If you find DataMaster useful in your research, please cite:
+
+```bibtex
+@article{zhou2025datamaster,
+  title={DataMaster: Towards Autonomous Data Engineering for Machine Learning},
+  author={Zhou, Zhifan and ...},
+  journal={arXiv preprint arXiv:2605.10906},
+  year={2025}
+}
+```
+
+> **Note:** The full author list will be finalized upon paper publication. Please check the [arXiv page](https://arxiv.org/abs/2605.10906) for the latest version.
 
 ---
 
