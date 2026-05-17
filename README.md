@@ -13,7 +13,7 @@
 </p>
 
 <h1 align="center">DataMaster</h1>
-<p align="center"><em>Towards Autonomous Data Engineering for Machine Learning</em></p>
+<p align="center"><em>Data-Centric Autonomous AI Research</em></p>
 
 <p align="center">
   <img src="docs/main.png" alt="DataMaster Framework Overview" width="780">
